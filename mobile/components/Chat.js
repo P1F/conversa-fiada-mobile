@@ -14,6 +14,7 @@ class Chat extends Component {
   }
 
   componentDidMount() {
+    this.setState({ userName: this.props.route.params.userName });
     this.socket = io("http://192.168.56.1:5001");
     this.socket.on("chat message", (msg) => {
       this.setState({ chatMessages: [...this.state.chatMessages, msg] });
@@ -21,20 +22,23 @@ class Chat extends Component {
   }
 
   submitChatMessage() {
-    this.socket.emit("chat message", this.state.chatMessage);
+    let msg = {user: this.state.userName, content: this.state.chatMessage};
+    this.socket.emit("chat message", msg);
     this.setState({ chatMessage: "" });
   }
 
   render() {
-    const chatMessages = this.state.chatMessages.map((chatMessage, index) => (
-      <Text key={index}>{chatMessage}</Text>
-    ));
-
-    let userName = this.props.route.params.userName;
+    const chatMessages = this.state.chatMessages.map((chatMessage, index) => {
+      return (
+        <Text key={index} style={chatMessage.user === this.state.userName ? {color: "white"} : {color: "black"}}>
+          {chatMessage.user}: {chatMessage.content}
+        </Text>
+      );
+    });
 
     return (
       <View style={styles.container}>
-        <Image style={styles.tinyLogo} source={require("./logo3.png")} />
+        <Image style={styles.tinyLogo} source={require("./logo3.jpeg")} />
         <TextInput
           style={{
             fontSize: 40,
@@ -51,7 +55,9 @@ class Chat extends Component {
             this.setState({ chatMessage });
           }}
         />
-        <View style={{ top: 50, color: "#fff" }}>{chatMessages}</View>
+        <View style={{ top: 50, color: "#fff" }}>
+          {chatMessages}
+        </View>
       </View>
     );
   }
@@ -77,7 +83,8 @@ const styles = StyleSheet.create({
     top: -20,
   },
   tinyLogo: {
-    height: 150,
+    width: "80%",
+    height: "30%"
   },
 });
 export default Chat;

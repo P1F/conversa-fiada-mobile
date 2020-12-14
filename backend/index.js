@@ -11,7 +11,7 @@ io.on("connection", socket => {
     console.log("new user connected");
 
     socket.on("chat message", msg => {
-        console.log(msg);
+        console.log(`user: ${msg.user} - msg: ${msg.content}`);
         io.emit("chat message", msg);
     })
 })
