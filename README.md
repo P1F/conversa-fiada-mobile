@@ -22,3 +22,7 @@ $ npm start
 # Relatório
 
 Segue o Relatório 'Relatório.pdf' em formato .pdf na raiz do diretório.
+
+# Apresentação
+
+https://www.youtube.com/watch?v=gJOk0K9es24&feature=youtu.be
