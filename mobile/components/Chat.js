@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
-import io from 'socket.io-client';
+import React, { Component } from "react";
+import { Image, StyleSheet, Text, TextInput, View, Button } from "react-native";
+import io from "socket.io-client";
 
 class Chat extends Component {
   constructor(props) {
@@ -8,15 +8,16 @@ class Chat extends Component {
     this.state = {
       chatMessage: "",
       chatMessages: [],
-      userName: ""
-    }
+      userName: "",
+      backgroundColor2: "#fff",
+    };
   }
 
   componentDidMount() {
     this.socket = io("http://192.168.56.1:5001");
-    this.socket.on("chat message", msg => {
+    this.socket.on("chat message", (msg) => {
       this.setState({ chatMessages: [...this.state.chatMessages, msg] });
-    })
+    });
   }
 
   submitChatMessage() {
@@ -24,25 +25,33 @@ class Chat extends Component {
     this.setState({ chatMessage: "" });
   }
 
-  render(){
+  render() {
     const chatMessages = this.state.chatMessages.map((chatMessage, index) => (
-        <Text key={index}>{chatMessage}</Text>
+      <Text key={index}>{chatMessage}</Text>
     ));
-    
+
     let userName = this.props.route.params.userName;
 
     return (
       <View style={styles.container}>
-        <TextInput 
-          style={{ height: 40, borderWidth: 2 }}
+        <Image style={styles.tinyLogo} source={require("./logo3.png")} />
+        <TextInput
+          style={{
+            fontSize: 40,
+            top: 50,
+            color: "#000",
+            backgroundColor: this.state.backgroundColor2,
+          }}
+          inlineImageLeft="search_icon"
+          defaultValue="Digite sua mensagem"
           autoCorrect={false}
-          onSubmitEditing={() => this.submitChatMessage()}
           value={this.state.chatMessage}
-          onChangeText={chatMessage => {
+          onSubmitEditing={() => this.submitChatMessage()}
+          onChangeText={(chatMessage) => {
             this.setState({ chatMessage });
           }}
         />
-        {chatMessages}
+        <View style={{ top: 50, color: "#fff" }}>{chatMessages}</View>
       </View>
     );
   }
@@ -51,8 +60,24 @@ class Chat extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#ff8585",
+  },
+  title: {
+    top: 50,
+    color: "#ff4646",
+    fontSize: 50,
+  },
+  circle: {
+    width: 500,
+    height: 500,
+    borderRadius: 500 / 2,
+    backgroundColor: "#FFF",
+    position: "absolute",
+    left: -120,
+    top: -20,
+  },
+  tinyLogo: {
+    height: 150,
   },
 });
-
-export default Chat
+export default Chat;
