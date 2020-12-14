@@ -5,13 +5,13 @@ Utilizando React-Native foi implementado um sistema de chat baseado na versão w
 
 Nessa versão demo, foi desenvolvido um esqueleto de projeto, demonstrando a usabilidade do protótipo.
 
-### Uso
+### Instalação de dependências
 
 ```sh
 $ npm install
-or use
-$ yarn install
 ```
+
+### Rodar o programa
 
 ```sh
 $ npm start
