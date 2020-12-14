@@ -1,0 +1,24 @@
+# Projeto Final CES26
+
+Utilizando React-native foi implementado um sistema de chat baseado na versão web do ConversaFiada!
+
+Nessa versão demo, foi desenvolvido o esqueleto, demonstrando a usabilidade do protótipo.
+
+### Uso
+
+```sh
+$ npm install
+or use
+$ yarn install
+```
+
+```sh
+$ npm start
+
+# Acesso http://localhost:19002/
+
+```
+# Relatório
+
+Segue o Relatório 'Relatório' em formato .pdf na raiz do diretório.
+
