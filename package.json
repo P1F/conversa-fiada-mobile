@@ -1,0 +1,14 @@
+{
+  "name": "react-native-chat",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "devInst": "concurrently \"cd backend && npm install\" \"cd mobile && npm install\"",
+    "start": "concurrently \"cd backend && node index.js\" \"cd mobile && npm start\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
